@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "codegenerator"
+name = "code-generator"
 version = "0.1.0"
 description = ""
 authors = ["gg <giovanni.carlo.gallo@gmail.com>"]
