@@ -5,13 +5,13 @@ from tqdm import tqdm
 from typing_extensions import Annotated
 from zenml import get_step_context, step
 
-from llm_engineering.application.crawlers.dispatcher import CrawlerDispatcher
-from llm_engineering.domain.documents import UserDocument
+from code_generator.app.crawlers.dispatcher import CrawlerDispatcher
+from code_generator.domain.documents import UserDocument
 
 
 @step
 def crawl_links(user: UserDocument, links: list[str]) -> Annotated[list[str], "crawled_links"]:
-    dispatcher = CrawlerDispatcher.build().register_linkedin().register_medium().register_github()
+    dispatcher = CrawlerDispatcher.build().register_github()
 
     logger.info(f"Starting to crawl {len(links)} link(s).")
 

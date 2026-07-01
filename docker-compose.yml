@@ -1,0 +1,56 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: "code_generator_mongo"
+    #entrypoint: >
+        #/bin/bash -c '
+        #openssl rand -base64 756 > /data/keyfile.key &&
+        #chmod 400 /data/keyfile.key &&
+        #chown mongodb:mongodb /data/keyfile.key &&
+        #/usr/local/bin/docker-entrypoint.sh mongod --replSet rs0 --keyFile /data/keyfile.key --bind_ip_all'
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "code_generator"
+      MONGO_INITDB_ROOT_PASSWORD: "code_generator"
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+    #healthcheck:
+      #test: mongosh
+        #-u $${MONGO_INITDB_ROOT_USERNAME}
+        #-p $${MONGO_INITDB_ROOT_PASSWORD}
+        #--eval "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'127.0.0.1:27017',priority:1}]}) }" | mongosh --port #27017 --quiet
+      #interval: 5s
+      #timeout: 30s
+      #start_period: 0s
+      #start_interval: 1s
+      #retries: 30
+    networks:
+      - local
+    restart: always
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: "code_generator_qdrant"
+    ports:
+      - 6333:6333
+      - 6334:6334
+    expose:
+      - 6333
+      - 6334
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - local
+    restart: always
+
+volumes:
+  mongo_data:
+  qdrant_data:
+
+networks:
+  local:
+    driver: bridge

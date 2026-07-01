@@ -8,5 +8,6 @@ settings:
 parameters:
   user_full_name: Giovanni Gallo # [First Name(s)] [Last Name]
   links:
-    # Personal Blog
-    - https://mlabonne.github.io/blog/posts/2024-07-29_Finetune_Llama31.html
+    - https://github.com/smokingred83/leetCode
+    - https://github.com/smokingred83/code-generator
+    - https://github.com/smokingred83/CS224n

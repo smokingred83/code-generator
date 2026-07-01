@@ -9,7 +9,7 @@ HUGGINGFACE_ACCESS_TOKEN=str
 COMET_API_KEY=str
 
 # MongoDB database
-DATABASE_HOST="mongodb://code_generator:code_generator@127.0.0.1:27017"
+DATABASE_HOST="mongodb://code_generator:code_generator@localhost:27017"
 
 # Qdrant vector database
 USE_QDRANT_CLOUD=false
